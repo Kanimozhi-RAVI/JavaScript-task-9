@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Records</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link 
+    rel="stylesheet" 
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      background: linear-gradient(to right, #1f1c2c, #928dab);
+      color: white;
+      padding: 30px;
+      min-height: 100vh;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #0abcf8;
+      text-shadow: 0 0 10px #0abcf8;
+    }
+
+    table {
+      background-color: rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    th, td {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    thead {
+      background-color: #0abcf8;
+      color: #000;
+    }
+
+    tbody tr:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-back {
+      display: block;
+      margin: 30px auto 0;
+      background-color: #0abcf8;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+
+    .btn-back:hover {
+      background-color: #098ab7;
+    }
+
+    .empty-msg {
+      text-align: center;
+      font-size: 20px;
+      padding: 50px;
+      color: #eee;
+    }
+
+    .table-responsive {
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2> Student Details</h2>
+
+    <div id="studentTableContainer" class="table-responsive"></div>
+
+    <button class="btn-back" onclick="goBack()">ADD DETAILS</button>
+  </div>
+
+  <script>
+    function goBack() {
+      window.location.href = "index.html"; 
+    }
+
+    const students = JSON.parse(localStorage.getItem("students")) || [];
+    const container = document.getElementById("studentTableContainer");
+
+    if (students.length === 0) {
+      container.innerHTML = "<div class='empty-msg'>No student data found.</div>";
+    } else {
+      let table = `
+        <table class="table table-bordered table-striped text-white">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Date of Birth</th>
+              <th>Age</th>
+              <th>Blood Group</th>
+              <th>Qualification</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      students.forEach((student, index) => {
+        table += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${student.username}</td>
+            <td>${student.dob}</td>
+            <td>${student.age}</td>
+            <td>${student.bloodgroup}</td>
+            <td>${student.qualification}</td>
+          </tr>
+        `;
+      });
+
+      table += `
+          </tbody>
+        </table>
+      `;
+
+      container.innerHTML = table;
+    }
+  </script>
+
+</body>
+</html>

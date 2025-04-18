@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+body{
+  background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('image/sea.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+.glow-text {
+    position: absolute;
+    top: -30px;
+    left: 40%;
+    transform: translateX(-50%);
+    padding: 10px;
+    color: #0abcf8;
+    font-weight: bold;
+    font-size:30px;
+    width: 320px;
+    height: 70px;
+    z-index: 1;
+    background: linear-gradient(120deg, rgba(245, 2, 245, 0.5), rgba(1, 161, 193, 0.5),rgba(253, 3, 128, 0.5));
+}
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 5px #00f7ff, 0 0 10px #00f7ff;
+    }
+    to {
+      text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+    }
+  }
+  
+  .main {
+    background:linear-gradient(rgba(121, 50, 172, 0.6),rgba(217, 43, 168, 0.6),rgba(89, 155, 236, 0.6));
+	width: 350px;
+	-webkit-animation-name: example; 
+    -webkit-animation-duration: 10s;
+    -webkit-animation-iteration-count: infinite; 
+    animation-name: example;
+    animation-duration: 1s;
+}
+  @-webkit-keyframes example {
+ 0%{
+	background:linear-gradient(rgba(138,63,191,0.6),rgba(191,63,155,0.6));
+ }
+ 25%{
+	background:linear-gradient(rgba(191,63,155,0.6),rgba(63,121,191,0.6));
+ }
+ 50%{
+	background:linear-gradient(rgba(138,63,191,0.6),rgba(63,121,191,0.6));
+ }
+ 75%{
+	background:linear-gradient(rgba(138,63,191,0.6),rgba(63,121,191,0.6));
+
+ }
+ 100%{
+	background:linear-gradient(rgba(191,63,155,0.6),rgba(63,121,191,0.6));
+
+ }
+}
+  .input-text{
+    justify-content: center;
+    align-items: center;
+  }
+
+  input{
+        border:none;
+        border-bottom: 2px solid #00f7ff;
+        padding: 1px 5px;
+        outline: none; 
+        background-color: transparent;
+        color: white;
+        width: 300px;
+        text-align: center;
+}
+input:hover{
+  border-bottom: 2px solid #491df7;
+}
+::-webkit-input-placeholder {
+    text-align: center;
+    color: #00f7ff;
+}
+.btn-glow {
+  background: linear-gradient(90deg, #3a8dde, #c85ed6);
+  color: white;
+  font-size: 18px;
+  width: 320px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+  box-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+}
+
+.btn-glow:hover {
+  background: linear-gradient(270deg, #ff00c8, #00ffe0, #a020f0,#00bfff, #ff8c00);
+  background-size: 300% 300%;
+  animation: glowingHover 3s ease infinite;
+  color: white;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+}
+
+@keyframes glowingHover {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
