@@ -1,130 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Student Records</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link 
-    rel="stylesheet" 
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <title>Student Table</title>
   <style>
     body {
-      background: linear-gradient(to right, #1f1c2c, #928dab);
+      background-color: #222;
       color: white;
-      padding: 30px;
-      min-height: 100vh;
-    }
-
-    h2 {
+      font-family: Arial, sans-serif;
       text-align: center;
-      margin-bottom: 40px;
-      color: #0abcf8;
-      text-shadow: 0 0 10px #0abcf8;
+      padding: 20px;
     }
 
     table {
-      background-color: rgba(255, 255, 255, 0.1);
-      overflow: hidden;
+      margin: auto;
+      width: 90%;
+      border-collapse: collapse;
+      margin-top: 20px;
     }
 
     th, td {
-      text-align: center;
-      vertical-align: middle;
+      border: 1px solid white;
+      padding: 10px;
     }
 
-    thead {
-      background-color: #0abcf8;
-      color: #000;
+    th {
+      background-color: #444;
     }
 
-    tbody tr:hover {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-
-    .btn-back {
-      display: block;
-      margin: 30px auto 0;
-      background-color: #0abcf8;
+    .back-btn {
+      background-color: #0689fb;
       color: white;
+      padding: 20px 30px;
       border: none;
-      padding: 10px 25px;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: background 0.3s ease;
-    }
-
-    .btn-back:hover {
-      background-color: #098ab7;
-    }
-
-    .empty-msg {
-      text-align: center;
+      border-radius: 5px;
+      cursor: pointer;
       font-size: 20px;
-      padding: 50px;
-      color: #eee;
     }
 
-    .table-responsive {
-      border-radius: 12px;
-      overflow-x: auto;
+    .back-btn:hover {
+      background-color: #218838;
+    }
+
+    .no-data {
+      margin-top: 40px;
+      font-size: 18px;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h2> Student Details</h2>
+  <h1>Student Details</h1>
+ 
 
-    <div id="studentTableContainer" class="table-responsive"></div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Date of Birth</th>
+        <th>Age</th>
+        <th>Blood Group</th>
+        <th>Qualification</th>
+      </tr>
+    </thead>
+    <tbody id="body"></tbody>
+  </table>
 
-    <button class="btn-back" onclick="goBack()">ADD DETAILS</button>
-  </div>
+  <div class="no-data" id="noDataMsg" style="display: none;">No student data found.</div>
+  <br>
+  <button class="back-btn" onclick="add()">Add Details</button>
 
   <script>
-    function goBack() {
-      window.location.href = "index.html"; 
+    var table = JSON.parse(localStorage.getItem('students')) || [];
+    console.log(table);
+
+    if (table.length === 0) {
+      document.getElementById('noDataMsg').style.display = 'block';
+    } else {
+      for (var i = 0; i < table.length; i++) {
+        document.getElementById('body').innerHTML +=
+          '<tr>' +
+            '<td>' + (i + 1) + '</td>' +
+            '<td>' + table[i].username + '</td>' +
+            '<td>' + table[i].dob + '</td>' +
+            '<td>' + table[i].age + '</td>' +
+            '<td>' + table[i].bloodgroup + '</td>' +
+            '<td>' + table[i].qualification + '</td>' +
+          '</tr>';
+      }
     }
 
-    const students = JSON.parse(localStorage.getItem("students")) || [];
-    const container = document.getElementById("studentTableContainer");
-
-    if (students.length === 0) {
-      container.innerHTML = "<div class='empty-msg'>No student data found.</div>";
-    } else {
-      let table = `
-        <table class="table table-bordered table-striped text-white">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Date of Birth</th>
-              <th>Age</th>
-              <th>Blood Group</th>
-              <th>Qualification</th>
-            </tr>
-          </thead>
-          <tbody>
-      `;
-
-      students.forEach((student, index) => {
-        table += `
-          <tr>
-            <td>${index + 1}</td>
-            <td>${student.username}</td>
-            <td>${student.dob}</td>
-            <td>${student.age}</td>
-            <td>${student.bloodgroup}</td>
-            <td>${student.qualification}</td>
-          </tr>
-        `;
-      });
-
-      table += `
-          </tbody>
-        </table>
-      `;
-
-      container.innerHTML = table;
+    function add() {
+      location.replace('index.html');
     }
   </script>
 
